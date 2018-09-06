@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////
 //
-// SFML - Simple and Fast Multimedia Library
+// SFML3D - Simple and Fast Multimedia Library
 // Copyright (C) 2007-2014 Marco Antognini (antognini.marco@gmail.com),
 //                         Laurent Gomila (laurent.gom@gmail.com),
 //
@@ -32,11 +32,11 @@
 #define RED     @"Red"
 
 // Our PIMPL
-struct SFMLmainWindow
+struct SFML3DmainWindow
 {
-    SFMLmainWindow(sf::WindowHandle win)
+    SFML3DmainWindow(sf3d::WindowHandle win)
     : renderWindow(win)
-    , background(sf::Color::Blue)
+    , background(sf3d::Color::Blue)
     {
         std::string resPath = [[[NSBundle mainBundle] resourcePath] tostdstring];
         if (!logo.loadFromFile(resPath + "/logo.png")) {
@@ -46,35 +46,35 @@ struct SFMLmainWindow
         logo.setSmooth(true);
 
         sprite.setTexture(logo, true);
-        sf::FloatRect rect = sprite.getLocalBounds();
-        sf::Vector2f size(rect.width, rect.height);
+        sf3d::FloatRect rect = sprite.getLocalBounds();
+        sf3d::Vector2f size(rect.width, rect.height);
         sprite.setOrigin(size / 2.f);
         sprite.scale(0.3, 0.3);
 
         unsigned int ww = renderWindow.getSize().x;
         unsigned int wh = renderWindow.getSize().y;
-        sprite.setPosition(sf::Vector2f(ww, wh) / 2.f);
+        sprite.setPosition(sf3d::Vector2f(ww, wh) / 2.f);
 
         if (!font.loadFromFile(resPath + "/sansation.ttf")) {
             NSLog(@"Couldn't load the font");
         }
 
-        text.setColor(sf::Color::White);
+        text.setColor(sf3d::Color::White);
         text.setFont(font);
     }
 
-    sf::RenderWindow    renderWindow;
-    sf::Font            font;
-    sf::Text            text;
-    sf::Texture         logo;
-    sf::Sprite          sprite;
-    sf::Color           background;
+    sf3d::RenderWindow    renderWindow;
+    sf3d::Font            font;
+    sf3d::Text            text;
+    sf3d::Texture         logo;
+    sf3d::Sprite          sprite;
+    sf3d::Color           background;
 };
 
 // Private stuff
 @interface CocoaAppDelegate ()
 
-@property (assign) SFMLmainWindow   *mainWindow;
+@property (assign) SFML3DmainWindow   *mainWindow;
 @property (retain) NSTimer          *renderTimer;
 @property (assign) BOOL              visible;
 
@@ -89,7 +89,7 @@ struct SFMLmainWindow
 @implementation CocoaAppDelegate
 
 @synthesize window          = m_window;
-@synthesize sfmlView        = m_sfmlView;
+@synthesize sfml3dView        = m_sfml3dView;
 @synthesize textField       = m_textField;
 
 @synthesize mainWindow      = m_mainWindow;
@@ -110,8 +110,8 @@ struct SFMLmainWindow
 {
     if (!self.initialized)
     {
-        // Init the SFML render area.
-        self.mainWindow = new SFMLmainWindow(self.sfmlView);
+        // Init the SFML3D render area.
+        self.mainWindow = new SFML3DmainWindow(self.sfml3dView);
         self.mainWindow->text.setString([self.textField.stringValue tostdwstring]);
         self.visible = YES;
 
@@ -144,10 +144,10 @@ struct SFMLmainWindow
     self.mainWindow->renderWindow.close();
 
     self.window             = nil;
-    self.sfmlView           = nil;
+    self.sfml3dView           = nil;
     self.textField          = nil;
 
-    delete (SFMLmainWindow *) self.mainWindow;
+    delete (SFML3DmainWindow *) self.mainWindow;
     self.mainWindow         = 0;
     self.renderTimer        = nil;
 
@@ -158,11 +158,11 @@ struct SFMLmainWindow
 {
     // Scaling
     /* /!\ we do this at 60fps so choose low scaling factor! /!\ */
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+    if (sf3d::Keyboard::isKeyPressed(sf3d::Keyboard::Up))
     {
         self.mainWindow->sprite.scale(1.01f, 1.01f);
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+    if (sf3d::Keyboard::isKeyPressed(sf3d::Keyboard::Down))
     {
         self.mainWindow->sprite.scale(0.99f, 0.99f);
     }
@@ -189,15 +189,15 @@ struct SFMLmainWindow
         NSString *color = [[sender selectedItem] title];
         if ([color isEqualToString:BLUE])
         {
-            self.mainWindow->background = sf::Color::Blue;
+            self.mainWindow->background = sf3d::Color::Blue;
         }
         else if ([color isEqualToString:GREEN])
         {
-            self.mainWindow->background = sf::Color::Green;
+            self.mainWindow->background = sf3d::Color::Green;
         }
         else
         {
-            self.mainWindow->background = sf::Color::Red;
+            self.mainWindow->background = sf3d::Color::Red;
         }
     }
 }

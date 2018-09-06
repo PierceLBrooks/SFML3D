@@ -5,6 +5,6 @@ set(SRCROOT ${PROJECT_SOURCE_DIR}/examples/ftp)
 set(SRC ${SRCROOT}/Ftp.cpp)
 
 # define the ftp target
-sfml_add_example(ftp
+sfml3d_add_example(ftp
                  SOURCES ${SRC}
-                 DEPENDS sfml-network sfml-system)
+                 DEPENDS sfml3d-network sfml3d-system)

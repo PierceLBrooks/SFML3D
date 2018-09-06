@@ -2,8 +2,8 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
+#include <SFML3D/Graphics.hpp>
+#include <SFML3D/Audio.hpp>
 #include <cmath>
 #include <ctime>
 #include <cstdlib>
@@ -23,82 +23,82 @@ int main()
     const float pi = 3.14159f;
     const int gameWidth = 800;
     const int gameHeight = 600;
-    sf::Vector2f paddleSize(25, 100);
+    sf3d::Vector2f paddleSize(25, 100);
     float ballRadius = 10.f;
 
     // Create the window of the application
-    sf::RenderWindow window(sf::VideoMode(gameWidth, gameHeight, 32), "SFML Pong");
+    sf3d::RenderWindow window(sf3d::VideoMode(gameWidth, gameHeight, 32), "SFML3D Pong");
     window.setVerticalSyncEnabled(true);
 
     // Load the sounds used in the game
-    sf::SoundBuffer ballSoundBuffer;
+    sf3d::SoundBuffer ballSoundBuffer;
     if (!ballSoundBuffer.loadFromFile("resources/ball.wav"))
         return EXIT_FAILURE;
-    sf::Sound ballSound(ballSoundBuffer);
+    sf3d::Sound ballSound(ballSoundBuffer);
 
     // Create the left paddle
-    sf::RectangleShape leftPaddle;
-    leftPaddle.setSize(paddleSize - sf::Vector2f(3, 3));
+    sf3d::RectangleShape leftPaddle;
+    leftPaddle.setSize(paddleSize - sf3d::Vector2f(3, 3));
     leftPaddle.setOutlineThickness(3);
-    leftPaddle.setOutlineColor(sf::Color::Black);
-    leftPaddle.setFillColor(sf::Color(100, 100, 200));
+    leftPaddle.setOutlineColor(sf3d::Color::Black);
+    leftPaddle.setFillColor(sf3d::Color(100, 100, 200));
     leftPaddle.setOrigin(paddleSize / 2.f);
 
     // Create the right paddle
-    sf::RectangleShape rightPaddle;
-    rightPaddle.setSize(paddleSize - sf::Vector2f(3, 3));
+    sf3d::RectangleShape rightPaddle;
+    rightPaddle.setSize(paddleSize - sf3d::Vector2f(3, 3));
     rightPaddle.setOutlineThickness(3);
-    rightPaddle.setOutlineColor(sf::Color::Black);
-    rightPaddle.setFillColor(sf::Color(200, 100, 100));
+    rightPaddle.setOutlineColor(sf3d::Color::Black);
+    rightPaddle.setFillColor(sf3d::Color(200, 100, 100));
     rightPaddle.setOrigin(paddleSize / 2.f);
 
     // Create the ball
-    sf::CircleShape ball;
+    sf3d::CircleShape ball;
     ball.setRadius(ballRadius - 3);
     ball.setOutlineThickness(3);
-    ball.setOutlineColor(sf::Color::Black);
-    ball.setFillColor(sf::Color::White);
+    ball.setOutlineColor(sf3d::Color::Black);
+    ball.setFillColor(sf3d::Color::White);
     ball.setOrigin(ballRadius / 2, ballRadius / 2);
 
     // Load the text font
-    sf::Font font;
+    sf3d::Font font;
     if (!font.loadFromFile("resources/sansation.ttf"))
         return EXIT_FAILURE;
 
     // Initialize the pause message
-    sf::Text pauseMessage;
+    sf3d::Text pauseMessage;
     pauseMessage.setFont(font);
     pauseMessage.setCharacterSize(40);
     pauseMessage.setPosition(170.f, 150.f);
-    pauseMessage.setColor(sf::Color::White);
-    pauseMessage.setString("Welcome to SFML pong!\nPress space to start the game");
+    pauseMessage.setColor(sf3d::Color::White);
+    pauseMessage.setString("Welcome to SFML3D pong!\nPress space to start the game");
 
     // Define the paddles properties
-    sf::Clock AITimer;
-    const sf::Time AITime   = sf::seconds(0.1f);
+    sf3d::Clock AITimer;
+    const sf3d::Time AITime   = sf3d::seconds(0.1f);
     const float paddleSpeed = 400.f;
     float rightPaddleSpeed  = 0.f;
     const float ballSpeed   = 400.f;
     float ballAngle         = 0.f; // to be changed later
 
-    sf::Clock clock;
+    sf3d::Clock clock;
     bool isPlaying = false;
     while (window.isOpen())
     {
         // Handle events
-        sf::Event event;
+        sf3d::Event event;
         while (window.pollEvent(event))
         {
             // Window closed or escape key pressed: exit
-            if ((event.type == sf::Event::Closed) || 
-               ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Escape)))
+            if ((event.type == sf3d::Event::Closed) || 
+               ((event.type == sf3d::Event::KeyPressed) && (event.key.code == sf3d::Keyboard::Escape)))
             {
                 window.close();
                 break;
             }
 
             // Space key pressed: play
-            if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Space))
+            if ((event.type == sf3d::Event::KeyPressed) && (event.key.code == sf3d::Keyboard::Space))
             {
                 if (!isPlaying)
                 {
@@ -127,12 +127,12 @@ int main()
             float deltaTime = clock.restart().asSeconds();
 
             // Move the player's paddle
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) &&
+            if (sf3d::Keyboard::isKeyPressed(sf3d::Keyboard::Up) &&
                (leftPaddle.getPosition().y - paddleSize.y / 2 > 5.f))
             {
                 leftPaddle.move(0.f, -paddleSpeed * deltaTime);
             }
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) &&
+            if (sf3d::Keyboard::isKeyPressed(sf3d::Keyboard::Down) &&
                (leftPaddle.getPosition().y + paddleSize.y / 2 < gameHeight - 5.f))
             {
                 leftPaddle.move(0.f, paddleSpeed * deltaTime);
@@ -218,7 +218,7 @@ int main()
         }
 
         // Clear the window
-        window.clear(sf::Color(50, 200, 50));
+        window.clear(sf3d::Color(50, 200, 50));
 
         if (isPlaying)
         {

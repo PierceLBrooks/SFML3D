@@ -25,7 +25,7 @@ DOXYFILE_ENCODING      = UTF-8
 # The PROJECT_NAME tag is a single word (or a sequence of words surrounded 
 # by quotes) that should identify the project.
 
-PROJECT_NAME           = SFML
+PROJECT_NAME           = SFML3D
 
 # The PROJECT_NUMBER tag can be used to enter a project or revision number. 
 # This could be handy for archiving the generated documentation or 
@@ -573,7 +573,7 @@ WARN_LOGFILE           =
 # directories like "/usr/src/myproject". Separate the files or directories 
 # with spaces.
 
-INPUT                  = "@DOXYGEN_INPUT_DIR@/include/SFML" \
+INPUT                  = "@DOXYGEN_INPUT_DIR@/include/SFML3D" \
                          "@DOXYGEN_INPUT_DIR@/doc/mainpage.hpp"
 
 # This tag can be used to specify the character encoding of the source files 
@@ -853,7 +853,7 @@ GENERATE_HTMLHELP      = @DOXYGEN_GENERATE_HTMLHELP@
 # can add a path in front of the file if the result should not be 
 # written to the html output directory.
 
-CHM_FILE               = ../SFML.chm
+CHM_FILE               = ../SFML3D.chm
 
 # If the GENERATE_HTMLHELP tag is set to YES, the HHC_LOCATION tag can 
 # be used to specify the location (absolute path including file name) of 
@@ -1251,11 +1251,11 @@ INCLUDE_FILE_PATTERNS  =
 # undefined via #undef or recursively expanded use the := operator 
 # instead of the = operator.
 
-PREDEFINED             = SFML_SYSTEM_API \
-                         SFML_NETWORK_API \
-                         SFML_WINDOW_API \
-                         SFML_AUDIO_API \
-                         SFML_GRAPHICS_API
+PREDEFINED             = SFML3D_SYSTEM_API \
+                         SFML3D_NETWORK_API \
+                         SFML3D_WINDOW_API \
+                         SFML3D_AUDIO_API \
+                         SFML3D_GRAPHICS_API
 
 # If the MACRO_EXPANSION and EXPAND_ONLY_PREDEF tags are set to YES then 
 # this tag can be used to specify a list of macro names that should be expanded. 

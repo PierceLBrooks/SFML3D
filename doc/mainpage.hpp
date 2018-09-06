@@ -2,38 +2,38 @@
 /// \mainpage
 ///
 /// \section welcome Welcome
-/// Welcome to the official SFML documentation. Here you will find a detailed
-/// view of all the SFML <a href="./annotated.php">classes</a> and functions. <br/>
+/// Welcome to the official SFML3D documentation. Here you will find a detailed
+/// view of all the SFML3D <a href="./annotated.php">classes</a> and functions. <br/>
 /// If you are looking for tutorials, you can visit the official website
-/// at <a href="http://www.sfml-dev.org/">www.sfml-dev.org</a>.
+/// at <a href="http://www.sfml3d-dev.org/">www.sfml3d-dev.org</a>.
 ///
 /// \section example Short example
-/// Here is a short example, to show you how simple it is to use SFML :
+/// Here is a short example, to show you how simple it is to use SFML3D :
 ///
 /// \code
 ///
-/// #include <SFML/Audio.hpp>
-/// #include <SFML/Graphics.hpp>
+/// #include <SFML3D/Audio.hpp>
+/// #include <SFML3D/Graphics.hpp>
 /// 
 /// int main()
 /// {
 ///     // Create the main window
-///     sf::RenderWindow window(sf::VideoMode(800, 600), "SFML window");
+///     sf3d::RenderWindow window(sf3d::VideoMode(800, 600), "SFML3D window");
 /// 
 ///     // Load a sprite to display
-///     sf::Texture texture;
+///     sf3d::Texture texture;
 ///     if (!texture.loadFromFile("cute_image.jpg"))
 ///         return EXIT_FAILURE;
-///     sf::Sprite sprite(texture);
+///     sf3d::Sprite sprite(texture);
 /// 
 ///     // Create a graphical text to display
-///     sf::Font font;
+///     sf3d::Font font;
 ///     if (!font.loadFromFile("arial.ttf"))
 ///         return EXIT_FAILURE;
-///     sf::Text text("Hello SFML", font, 50);
+///     sf3d::Text text("Hello SFML3D", font, 50);
 /// 
 ///     // Load a music to play
-///     sf::Music music;
+///     sf3d::Music music;
 ///     if (!music.openFromFile("nice_music.ogg"))
 ///         return EXIT_FAILURE;
 ///
@@ -44,11 +44,11 @@
 ///     while (window.isOpen())
 ///     {
 ///         // Process events
-///         sf::Event event;
+///         sf3d::Event event;
 ///         while (window.pollEvent(event))
 ///         {
 ///             // Close window : exit
-///             if (event.type == sf::Event::Closed)
+///             if (event.type == sf3d::Event::Closed)
 ///                 window.close();
 ///         }
 /// 

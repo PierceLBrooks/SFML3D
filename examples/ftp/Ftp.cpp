@@ -2,7 +2,7 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include <SFML/Network.hpp>
+#include <SFML3D/Network.hpp>
 #include <fstream>
 #include <iostream>
 
@@ -11,7 +11,7 @@
 /// Print a FTP response into a standard output stream
 ///
 ////////////////////////////////////////////////////////////
-std::ostream& operator <<(std::ostream& stream, const sf::Ftp::Response& response)
+std::ostream& operator <<(std::ostream& stream, const sf3d::Ftp::Response& response)
 {
     return stream << response.getStatus() << response.getMessage();
 }
@@ -26,17 +26,17 @@ std::ostream& operator <<(std::ostream& stream, const sf::Ftp::Response& respons
 int main()
 {
     // Choose the server address
-    sf::IpAddress address;
+    sf3d::IpAddress address;
     do
     {
         std::cout << "Enter the FTP server address : ";
         std::cin  >> address;
     }
-    while (address == sf::IpAddress::None);
+    while (address == sf3d::IpAddress::None);
 
     // Connect to the server
-    sf::Ftp server;
-    sf::Ftp::Response connectResponse = server.connect(address);
+    sf3d::Ftp server;
+    sf3d::Ftp::Response connectResponse = server.connect(address);
     std::cout << connectResponse << std::endl;
     if (!connectResponse.isOk())
         return EXIT_FAILURE;
@@ -49,7 +49,7 @@ int main()
     std::cin  >> password;
 
     // Login to the server
-    sf::Ftp::Response loginResponse = server.login(user, password);
+    sf3d::Ftp::Response loginResponse = server.login(user, password);
     std::cout << loginResponse << std::endl;
     if (!loginResponse.isOk())
         return EXIT_FAILURE;
@@ -91,7 +91,7 @@ int main()
             case 1 :
             {
                 // Print the current server directory
-                sf::Ftp::DirectoryResponse response = server.getWorkingDirectory();
+                sf3d::Ftp::DirectoryResponse response = server.getWorkingDirectory();
                 std::cout << response << std::endl;
                 std::cout << "Current directory is " << response.getDirectory() << std::endl;
                 break;
@@ -100,7 +100,7 @@ int main()
             case 2 :
             {
                 // Print the contents of the current server directory
-                sf::Ftp::ListingResponse response = server.getDirectoryListing();
+                sf3d::Ftp::ListingResponse response = server.getDirectoryListing();
                 std::cout << response << std::endl;
                 const std::vector<std::string>& names = response.getListing();
                 for (std::vector<std::string>::const_iterator it = names.begin(); it != names.end(); ++it)

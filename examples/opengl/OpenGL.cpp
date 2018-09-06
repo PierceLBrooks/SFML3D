@@ -2,8 +2,8 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include <SFML/Graphics.hpp>
-#include <SFML/OpenGL.hpp>
+#include <SFML3D/Graphics.hpp>
+#include <SFML3D/OpenGL.hpp>
 
 
 ////////////////////////////////////////////////////////////
@@ -15,36 +15,36 @@
 int main()
 {
     // Request a 32-bits depth buffer when creating the window
-    sf::ContextSettings contextSettings;
+    sf3d::ContextSettings contextSettings;
     contextSettings.depthBits = 32;
 
     // Create the main window
-    sf::RenderWindow window(sf::VideoMode(800, 600), "SFML graphics with OpenGL", sf::Style::Default, contextSettings);
+    sf3d::RenderWindow window(sf3d::VideoMode(800, 600), "SFML3D graphics with OpenGL", sf3d::Style::Default, contextSettings);
     window.setVerticalSyncEnabled(true);
 
     // Make it the active window for OpenGL calls
     window.setActive();
 
     // Create a sprite for the background
-    sf::Texture backgroundTexture;
+    sf3d::Texture backgroundTexture;
     if (!backgroundTexture.loadFromFile("resources/background.jpg"))
         return EXIT_FAILURE;
-    sf::Sprite background(backgroundTexture);
+    sf3d::Sprite background(backgroundTexture);
 
     // Create some text to draw on top of our OpenGL object
-    sf::Font font;
+    sf3d::Font font;
     if (!font.loadFromFile("resources/sansation.ttf"))
         return EXIT_FAILURE;
-    sf::Text text("SFML / OpenGL demo", font);
-    text.setColor(sf::Color(255, 255, 255, 170));
+    sf3d::Text text("SFML3D / OpenGL demo", font);
+    text.setColor(sf3d::Color(255, 255, 255, 170));
     text.setPosition(250.f, 450.f);
 
     // Load an OpenGL texture.
-    // We could directly use a sf::Texture as an OpenGL texture (with its Bind() member function),
+    // We could directly use a sf3d::Texture as an OpenGL texture (with its Bind() member function),
     // but here we want more control on it (generate mipmaps, ...) so we create a new one from an image
     GLuint texture = 0;
     {
-        sf::Image image;
+        sf3d::Image image;
         if (!image.loadFromFile("resources/texture.jpg"))
             return EXIT_FAILURE;
         glGenTextures(1, &texture);
@@ -133,25 +133,25 @@ int main()
     glDisableClientState(GL_COLOR_ARRAY);
 
     // Create a clock for measuring the time elapsed
-    sf::Clock clock;
+    sf3d::Clock clock;
 
     // Start game loop
     while (window.isOpen())
     {
         // Process events
-        sf::Event event;
+        sf3d::Event event;
         while (window.pollEvent(event))
         {
             // Close window : exit
-            if (event.type == sf::Event::Closed)
+            if (event.type == sf3d::Event::Closed)
                 window.close();
 
             // Escape key : exit
-            if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Escape))
+            if ((event.type == sf3d::Event::KeyPressed) && (event.key.code == sf3d::Keyboard::Escape))
                 window.close();
 
             // Adjust the viewport when the window is resized
-            if (event.type == sf::Event::Resized)
+            if (event.type == sf3d::Event::Resized)
                 glViewport(0, 0, event.size.width, event.size.height);
         }
 
@@ -164,8 +164,8 @@ int main()
         glClear(GL_DEPTH_BUFFER_BIT);
 
         // We get the position of the mouse cursor, so that we can move the box accordingly
-        float x =  sf::Mouse::getPosition(window).x * 200.f / window.getSize().x - 100.f;
-        float y = -sf::Mouse::getPosition(window).y * 200.f / window.getSize().y + 100.f;
+        float x =  sf3d::Mouse::getPosition(window).x * 200.f / window.getSize().x - 100.f;
+        float y = -sf3d::Mouse::getPosition(window).y * 200.f / window.getSize().y + 100.f;
 
         // Apply some transformations
         glMatrixMode(GL_MODELVIEW);

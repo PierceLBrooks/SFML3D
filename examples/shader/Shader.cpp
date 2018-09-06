@@ -3,12 +3,12 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include "Effect.hpp"
-#include <SFML/Graphics.hpp>
+#include <SFML3D/Graphics.hpp>
 #include <vector>
 #include <cmath>
 
 
-const sf::Font* Effect::s_font = NULL;
+const sf3d::Font* Effect::s_font = NULL;
 
 ////////////////////////////////////////////////////////////
 // "Pixelate" fragment shader
@@ -41,7 +41,7 @@ public :
         m_shader.setParameter("pixel_threshold", (x + y) / 30);
     }
 
-    void onDraw(sf::RenderTarget& target, sf::RenderStates states) const
+    void onDraw(sf3d::RenderTarget& target, sf3d::RenderStates states) const
     {
         states.shader = &m_shader;
         target.draw(m_sprite, states);
@@ -49,9 +49,9 @@ public :
 
 private:
 
-    sf::Texture m_texture;
-    sf::Sprite m_sprite;
-    sf::Shader m_shader;
+    sf3d::Texture m_texture;
+    sf3d::Sprite m_sprite;
+    sf3d::Shader m_shader;
 };
 
 
@@ -106,7 +106,7 @@ public :
         m_shader.setParameter("blur_radius", (x + y) * 0.008f);
     }
 
-    void onDraw(sf::RenderTarget& target, sf::RenderStates states) const
+    void onDraw(sf3d::RenderTarget& target, sf3d::RenderStates states) const
     {
         states.shader = &m_shader;
         target.draw(m_text, states);
@@ -114,8 +114,8 @@ public :
 
 private:
 
-    sf::Text m_text;
-    sf::Shader m_shader;
+    sf3d::Text m_text;
+    sf3d::Shader m_shader;
 };
 
 
@@ -134,15 +134,15 @@ public :
     bool onLoad()
     {
         // Create the points
-        m_points.setPrimitiveType(sf::Points);
+        m_points.setPrimitiveType(sf3d::Points);
         for (int i = 0; i < 40000; ++i)
         {
             float x = static_cast<float>(std::rand() % 800);
             float y = static_cast<float>(std::rand() % 600);
-            sf::Uint8 r = std::rand() % 255;
-            sf::Uint8 g = std::rand() % 255;
-            sf::Uint8 b = std::rand() % 255;
-            m_points.append(sf::Vertex(sf::Vector2f(x, y), sf::Color(r, g, b)));
+            sf3d::Uint8 r = std::rand() % 255;
+            sf3d::Uint8 g = std::rand() % 255;
+            sf3d::Uint8 b = std::rand() % 255;
+            m_points.append(sf3d::Vertex(sf3d::Vector2f(x, y), sf3d::Color(r, g, b)));
         }
 
         // Load the shader
@@ -150,7 +150,7 @@ public :
             return false;
 
         // Generate a 1D texture full of random numbers
-        sf::Uint8 random_numbers[4000];
+        sf3d::Uint8 random_numbers[4000];
         for (int i = 0; i < 4000; ++i)
             random_numbers[i] = std::rand() % 255;
 
@@ -171,7 +171,7 @@ public :
         m_shader.setParameter("blink_alpha", 0.5f + std::cos(time * 3) * 0.25f);
     }
 
-    void onDraw(sf::RenderTarget& target, sf::RenderStates states) const
+    void onDraw(sf3d::RenderTarget& target, sf3d::RenderStates states) const
     {
         states.shader = &m_shader;
         target.draw(m_points, states);
@@ -179,9 +179,9 @@ public :
 
 private:
 
-    sf::VertexContainer m_points;
-    sf::Shader m_shader;
-    sf::Texture m_random_texture;
+    sf3d::VertexContainer m_points;
+    sf3d::Shader m_shader;
+    sf3d::Texture m_random_texture;
 };
 
 
@@ -205,7 +205,7 @@ public :
         m_surface.setSmooth(true);
 
         // Load the textures
-        if (!m_backgroundTexture.loadFromFile("resources/sfml.png"))
+        if (!m_backgroundTexture.loadFromFile("resources/sfml3d.png"))
             return false;
         m_backgroundTexture.setSmooth(true);
         if (!m_entityTexture.loadFromFile("resources/devices.png"))
@@ -219,7 +219,7 @@ public :
         // Load the moving entities
         for (int i = 0; i < 6; ++i)
         {
-            sf::Sprite entity(m_entityTexture, sf::IntRect(96 * i, 0, 96, 96));
+            sf3d::Sprite entity(m_entityTexture, sf3d::IntRect(96 * i, 0, 96, 96));
             m_entities.push_back(entity);
         }
 
@@ -237,34 +237,34 @@ public :
         // Update the position of the moving entities
         for (std::size_t i = 0; i < m_entities.size(); ++i)
         {
-            sf::Vector2f position;
+            sf3d::Vector2f position;
             position.x = std::cos(0.25f * (time * i + (m_entities.size() - i))) * 300 + 350;
             position.y = std::sin(0.25f * (time * (m_entities.size() - i) + i)) * 200 + 250;
             m_entities[i].setPosition(position);
         }
 
         // Render the updated scene to the off-screen surface
-        m_surface.clear(sf::Color::White);
+        m_surface.clear(sf3d::Color::White);
         m_surface.draw(m_backgroundSprite);
         for (std::size_t i = 0; i < m_entities.size(); ++i)
             m_surface.draw(m_entities[i]);
         m_surface.display();
     }
 
-    void onDraw(sf::RenderTarget& target, sf::RenderStates states) const
+    void onDraw(sf3d::RenderTarget& target, sf3d::RenderStates states) const
     {
         states.shader = &m_shader;
-        target.draw(sf::Sprite(m_surface.getTexture()), states);
+        target.draw(sf3d::Sprite(m_surface.getTexture()), states);
     }
 
 private:
 
-    sf::RenderTexture m_surface;
-    sf::Texture m_backgroundTexture;
-    sf::Texture m_entityTexture;
-    sf::Sprite m_backgroundSprite;
-    std::vector<sf::Sprite> m_entities;
-    sf::Shader m_shader;
+    sf3d::RenderTexture m_surface;
+    sf3d::Texture m_backgroundTexture;
+    sf3d::Texture m_entityTexture;
+    sf3d::Sprite m_backgroundSprite;
+    std::vector<sf3d::Sprite> m_entities;
+    sf3d::Shader m_shader;
 };
 
 
@@ -277,11 +277,11 @@ private:
 int main()
 {
     // Create the main window
-    sf::RenderWindow window(sf::VideoMode(800, 600), "SFML Shader");
+    sf3d::RenderWindow window(sf3d::VideoMode(800, 600), "SFML3D Shader");
     window.setVerticalSyncEnabled(true);
 
     // Load the application font and pass it to the Effect class
-    sf::Font font;
+    sf3d::Font font;
     if (!font.loadFromFile("resources/sansation.ttf"))
         return EXIT_FAILURE;
     Effect::setFont(font);
@@ -299,46 +299,46 @@ int main()
         effects[i]->load();
 
     // Create the messages background
-    sf::Texture textBackgroundTexture;
+    sf3d::Texture textBackgroundTexture;
     if (!textBackgroundTexture.loadFromFile("resources/text-background.png"))
         return EXIT_FAILURE;
-    sf::Sprite textBackground(textBackgroundTexture);
+    sf3d::Sprite textBackground(textBackgroundTexture);
     textBackground.setPosition(0, 520);
-    textBackground.setColor(sf::Color(255, 255, 255, 200));
+    textBackground.setColor(sf3d::Color(255, 255, 255, 200));
 
     // Create the description text
-    sf::Text description("Current effect: " + effects[current]->getName(), font, 20);
+    sf3d::Text description("Current effect: " + effects[current]->getName(), font, 20);
     description.setPosition(10, 530);
-    description.setColor(sf::Color(80, 80, 80));
+    description.setColor(sf3d::Color(80, 80, 80));
 
     // Create the instructions text
-    sf::Text instructions("Press left and right arrows to change the current shader", font, 20);
+    sf3d::Text instructions("Press left and right arrows to change the current shader", font, 20);
     instructions.setPosition(280, 555);
-    instructions.setColor(sf::Color(80, 80, 80));
+    instructions.setColor(sf3d::Color(80, 80, 80));
 
     // Start the game loop
-    sf::Clock clock;
+    sf3d::Clock clock;
     while (window.isOpen())
     {
         // Process events
-        sf::Event event;
+        sf3d::Event event;
         while (window.pollEvent(event))
         {
             // Close window: exit
-            if (event.type == sf::Event::Closed)
+            if (event.type == sf3d::Event::Closed)
                 window.close();
 
-            if (event.type == sf::Event::KeyPressed)
+            if (event.type == sf3d::Event::KeyPressed)
             {
                 switch (event.key.code)
                 {
                     // Escape key: exit
-                    case sf::Keyboard::Escape:
+                    case sf3d::Keyboard::Escape:
                         window.close();
                         break;
 
                     // Left arrow key: previous shader
-                    case sf::Keyboard::Left:
+                    case sf3d::Keyboard::Left:
                         if (current == 0)
                             current = effects.size() - 1;
                         else
@@ -347,7 +347,7 @@ int main()
                         break;
 
                     // Right arrow key: next shader
-                    case sf::Keyboard::Right:
+                    case sf3d::Keyboard::Right:
                         if (current == effects.size() - 1)
                             current = 0;
                         else
@@ -362,12 +362,12 @@ int main()
         }
 
         // Update the current example
-        float x = static_cast<float>(sf::Mouse::getPosition(window).x) / window.getSize().x;
-        float y = static_cast<float>(sf::Mouse::getPosition(window).y) / window.getSize().y;
+        float x = static_cast<float>(sf3d::Mouse::getPosition(window).x) / window.getSize().x;
+        float y = static_cast<float>(sf3d::Mouse::getPosition(window).y) / window.getSize().y;
         effects[current]->update(clock.getElapsedTime().asSeconds(), x, y);
 
         // Clear the window
-        window.clear(sf::Color(255, 128, 0));
+        window.clear(sf3d::Color(255, 128, 0));
 
         // Draw the current example
         window.draw(*effects[current]);

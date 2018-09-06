@@ -7,6 +7,6 @@ set(SRC
     ${SRCROOT}/Shader.cpp)
 
 # define the shader target
-sfml_add_example(shader GUI_APP
+sfml3d_add_example(shader GUI_APP
                  SOURCES ${SRC}
-                 DEPENDS sfml-graphics sfml-window sfml-system)
+                 DEPENDS sfml3d-graphics sfml3d-window sfml3d-system)

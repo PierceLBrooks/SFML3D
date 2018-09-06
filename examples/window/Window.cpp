@@ -1,8 +1,8 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include <SFML/Window.hpp>
-#include <SFML/OpenGL.hpp>
+#include <SFML3D/Window.hpp>
+#include <SFML3D/OpenGL.hpp>
 
 
 ////////////////////////////////////////////////////////////
@@ -14,11 +14,11 @@
 int main()
 {
     // Request a 32-bits depth buffer when creating the window
-    sf::ContextSettings contextSettings;
+    sf3d::ContextSettings contextSettings;
     contextSettings.depthBits = 32;
 
     // Create the main window
-    sf::Window window(sf::VideoMode(640, 480), "SFML window with OpenGL", sf::Style::Default, contextSettings);
+    sf3d::Window window(sf3d::VideoMode(640, 480), "SFML3D window with OpenGL", sf3d::Style::Default, contextSettings);
 
     // Make it the active window for OpenGL calls
     window.setActive();
@@ -102,25 +102,25 @@ int main()
     glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 
     // Create a clock for measuring the time elapsed
-    sf::Clock clock;
+    sf3d::Clock clock;
 
     // Start the game loop
     while (window.isOpen())
     {
         // Process events
-        sf::Event event;
+        sf3d::Event event;
         while (window.pollEvent(event))
         {
             // Close window: exit
-            if (event.type == sf::Event::Closed)
+            if (event.type == sf3d::Event::Closed)
                 window.close();
 
             // Escape key: exit
-            if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Escape))
+            if ((event.type == sf3d::Event::KeyPressed) && (event.key.code == sf3d::Keyboard::Escape))
                 window.close();
 
             // Resize event: adjust the viewport
-            if (event.type == sf::Event::Resized)
+            if (event.type == sf3d::Event::Resized)
                 glViewport(0, 0, event.size.width, event.size.height);
         }
 

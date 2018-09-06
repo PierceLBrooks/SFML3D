@@ -7,6 +7,6 @@ set(SRC ${SRCROOT}/Sockets.cpp
         ${SRCROOT}/UDP.cpp)
 
 # define the sockets target
-sfml_add_example(sockets
+sfml3d_add_example(sockets
                  SOURCES ${SRC}
-                 DEPENDS sfml-network sfml-system)
+                 DEPENDS sfml3d-network sfml3d-system)

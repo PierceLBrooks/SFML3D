@@ -7,6 +7,6 @@ set(SRC ${SRCROOT}/VoIP.cpp
         ${SRCROOT}/Server.cpp)
 
 # define the voip target
-sfml_add_example(voip
+sfml3d_add_example(voip
                  SOURCES ${SRC}
-                 DEPENDS sfml-audio sfml-network sfml-system)
+                 DEPENDS sfml3d-audio sfml3d-network sfml3d-system)

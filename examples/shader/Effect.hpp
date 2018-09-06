@@ -4,7 +4,7 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include <SFML/Graphics.hpp>
+#include <SFML3D/Graphics.hpp>
 #include <cassert>
 #include <string>
 
@@ -12,7 +12,7 @@
 ////////////////////////////////////////////////////////////
 // Base class for effects
 ////////////////////////////////////////////////////////////
-class Effect : public sf::Drawable
+class Effect : public sf3d::Drawable
 {
 public :
 
@@ -20,7 +20,7 @@ public :
     {
     }
 
-    static void setFont(const sf::Font& font)
+    static void setFont(const sf3d::Font& font)
     {
         s_font = &font;
     }
@@ -32,7 +32,7 @@ public :
 
     void load()
     {
-        m_isLoaded = sf::Shader::isAvailable() && onLoad();
+        m_isLoaded = sf3d::Shader::isAvailable() && onLoad();
     }
 
     void update(float time, float x, float y)
@@ -41,7 +41,7 @@ public :
             onUpdate(time, x, y);
     }
 
-    void draw(sf::RenderTarget& target, sf::RenderStates states) const
+    void draw(sf3d::RenderTarget& target, sf3d::RenderStates states) const
     {
         if (m_isLoaded)
         {
@@ -49,7 +49,7 @@ public :
         }
         else
         {
-            sf::Text error("Shader not\nsupported", getFont());
+            sf3d::Text error("Shader not\nsupported", getFont());
             error.setPosition(320.f, 200.f);
             error.setCharacterSize(36);
             target.draw(error, states);
@@ -64,7 +64,7 @@ protected :
     {
     }
 
-    static const sf::Font& getFont()
+    static const sf3d::Font& getFont()
     {
         assert(s_font != NULL);
         return *s_font;
@@ -75,14 +75,14 @@ private :
     // Virtual functions to be implemented in derived effects
     virtual bool onLoad() = 0;
     virtual void onUpdate(float time, float x, float y) = 0;
-    virtual void onDraw(sf::RenderTarget& target, sf::RenderStates states) const = 0;
+    virtual void onDraw(sf3d::RenderTarget& target, sf3d::RenderStates states) const = 0;
 
 private :
 
     std::string m_name;
     bool m_isLoaded;
 
-    static const sf::Font* s_font;
+    static const sf3d::Font* s_font;
 };
 
 #endif // EFFECT_HPP

@@ -2,7 +2,7 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include <SFML/Audio.hpp>
+#include <SFML3D/Audio.hpp>
 #include <iomanip>
 #include <iostream>
 
@@ -16,7 +16,7 @@
 int main()
 {
     // Check that the device can capture audio
-    if (sf::SoundRecorder::isAvailable() == false)
+    if (sf3d::SoundRecorder::isAvailable() == false)
     {
         std::cout << "Sorry, audio capture is not supported by your system" << std::endl;
         return EXIT_SUCCESS;
@@ -33,7 +33,7 @@ int main()
     std::cin.ignore(10000, '\n');
 
     // Here we'll use an integrated custom recorder, which saves the captured data into a SoundBuffer
-    sf::SoundBufferRecorder recorder;
+    sf3d::SoundBufferRecorder recorder;
 
     // Audio capture is done in a separate thread, so we can block the main thread while it is capturing
     recorder.start(sampleRate);
@@ -42,7 +42,7 @@ int main()
     recorder.stop();
 
     // Get the buffer containing the captured data
-    const sf::SoundBuffer& buffer = recorder.getBuffer();
+    const sf3d::SoundBuffer& buffer = recorder.getBuffer();
 
     // Display captured sound informations
     std::cout << "Sound information :" << std::endl;
@@ -69,18 +69,18 @@ int main()
     else
     {
         // Create a sound instance and play it
-        sf::Sound sound(buffer);
+        sf3d::Sound sound(buffer);
         sound.play();
 
         // Wait until finished
-        while (sound.getStatus() == sf::Sound::Playing)
+        while (sound.getStatus() == sf3d::Sound::Playing)
         {
             // Display the playing position
             std::cout << "\rPlaying... " << std::fixed << std::setprecision(2) << sound.getPlayingOffset().asSeconds() << " sec";
             std::cout << std::flush;
 
             // Leave some CPU time for other threads
-            sf::sleep(sf::milliseconds(100));
+            sf3d::sleep(sf3d::milliseconds(100));
         }
     }
 

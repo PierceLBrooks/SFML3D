@@ -2,7 +2,7 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include <SFML/Network.hpp>
+#include <SFML3D/Network.hpp>
 #include <iostream>
 
 
@@ -14,29 +14,29 @@
 void runTcpServer(unsigned short port)
 {
     // Create a server socket to accept new connections
-    sf::TcpListener listener;
+    sf3d::TcpListener listener;
 
     // Listen to the given port for incoming connections
-    if (listener.listen(port) != sf::Socket::Done)
+    if (listener.listen(port) != sf3d::Socket::Done)
         return;
     std::cout << "Server is listening to port " << port << ", waiting for connections... " << std::endl;
 
     // Wait for a connection
-    sf::TcpSocket socket;
-    if (listener.accept(socket) != sf::Socket::Done)
+    sf3d::TcpSocket socket;
+    if (listener.accept(socket) != sf3d::Socket::Done)
         return;
     std::cout << "Client connected: " << socket.getRemoteAddress() << std::endl;
 
     // Send a message to the connected client
     const char out[] = "Hi, I'm the server";
-    if (socket.send(out, sizeof(out)) != sf::Socket::Done)
+    if (socket.send(out, sizeof(out)) != sf3d::Socket::Done)
         return;
     std::cout << "Message sent to the client: \"" << out << "\"" << std::endl;
 
     // Receive a message back from the client
     char in[128];
     std::size_t received;
-    if (socket.receive(in, sizeof(in), received) != sf::Socket::Done)
+    if (socket.receive(in, sizeof(in), received) != sf3d::Socket::Done)
         return;
     std::cout << "Answer received from the client: \"" << in << "\"" << std::endl;
 }
@@ -50,32 +50,32 @@ void runTcpServer(unsigned short port)
 void runTcpClient(unsigned short port)
 {
     // Ask for the server address
-    sf::IpAddress server;
+    sf3d::IpAddress server;
     do
     {
         std::cout << "Type the address or name of the server to connect to: ";
         std::cin  >> server;
     }
-    while (server == sf::IpAddress::None);
+    while (server == sf3d::IpAddress::None);
 
     // Create a socket for communicating with the server
-    sf::TcpSocket socket;
+    sf3d::TcpSocket socket;
 
     // Connect to the server
-    if (socket.connect(server, port) != sf::Socket::Done)
+    if (socket.connect(server, port) != sf3d::Socket::Done)
         return;
     std::cout << "Connected to server " << server << std::endl;
 
     // Receive a message from the server
     char in[128];
     std::size_t received;
-    if (socket.receive(in, sizeof(in), received) != sf::Socket::Done)
+    if (socket.receive(in, sizeof(in), received) != sf3d::Socket::Done)
         return;
     std::cout << "Message received from the server: \"" << in << "\"" << std::endl;
 
     // Send an answer to the server
     const char out[] = "Hi, I'm a client";
-    if (socket.send(out, sizeof(out)) != sf::Socket::Done)
+    if (socket.send(out, sizeof(out)) != sf3d::Socket::Done)
         return;
     std::cout << "Message sent to the server: \"" << out << "\"" << std::endl;
 }

@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////
 //
-// SFML - Simple and Fast Multimedia Library
+// SFML3D - Simple and Fast Multimedia Library
 // Copyright (C) 2007-2014 Marco Antognini (antognini.marco@gmail.com),
 //                         Laurent Gomila (laurent.gom@gmail.com),
 //
@@ -24,7 +24,7 @@
 ////////////////////////////////////////////////////////////
 
 #import <Cocoa/Cocoa.h>
-#import <SFML/Graphics.hpp>
+#import <SFML3D/Graphics.hpp>
 
 /*
  * NB : We need pointers for C++ objects fields in Obj-C interface !
@@ -34,7 +34,7 @@
  *      other file including this one to be Obj-C++.
  */
 
-struct SFMLmainWindow;
+struct SFML3DmainWindow;
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= 1060
 @interface CocoaAppDelegate : NSObject <NSApplicationDelegate> {
@@ -43,16 +43,16 @@ struct SFMLmainWindow;
 #endif
 @private
     NSWindow        *m_window;
-    NSView          *m_sfmlView;
+    NSView          *m_sfml3dView;
     NSTextField     *m_textField;
-    SFMLmainWindow  *m_mainWindow;
+    SFML3DmainWindow  *m_mainWindow;
     NSTimer         *m_renderTimer;
     BOOL             m_visible;
     BOOL             m_initialized;
 }
 
 @property (retain) IBOutlet NSWindow    *window;
-@property (assign) IBOutlet NSView      *sfmlView;
+@property (assign) IBOutlet NSView      *sfml3dView;
 @property (assign) IBOutlet NSTextField *textField;
 
 -(IBAction)colorChanged:(NSPopUpButton *)sender;
@@ -64,7 +64,7 @@ struct SFMLmainWindow;
 @end
 
 /*
- * This interface is used to prevent the system alert produced when the SFML view
+ * This interface is used to prevent the system alert produced when the SFML3D view
  * has the focus and the user press a key.
  */
 @interface SilentWindow : NSWindow

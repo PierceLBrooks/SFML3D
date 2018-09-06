@@ -2,7 +2,7 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include <SFML/Audio.hpp>
+#include <SFML3D/Audio.hpp>
 #include <iomanip>
 #include <iostream>
 
@@ -14,7 +14,7 @@
 void playSound()
 {
     // Load a sound buffer from a wav file
-    sf::SoundBuffer buffer;
+    sf3d::SoundBuffer buffer;
     if (!buffer.loadFromFile("resources/canary.wav"))
         return;
 
@@ -25,14 +25,14 @@ void playSound()
     std::cout << " " << buffer.getChannelCount()         << " channels"      << std::endl;
 
     // Create a sound instance and play it
-    sf::Sound sound(buffer);
+    sf3d::Sound sound(buffer);
     sound.play();
 
     // Loop while the sound is playing
-    while (sound.getStatus() == sf::Sound::Playing)
+    while (sound.getStatus() == sf3d::Sound::Playing)
     {
         // Leave some CPU time for other processes
-        sf::sleep(sf::milliseconds(100));
+        sf3d::sleep(sf3d::milliseconds(100));
 
         // Display the playing position
         std::cout << "\rPlaying... " << std::fixed << std::setprecision(2) << sound.getPlayingOffset().asSeconds() << " sec   ";
@@ -49,7 +49,7 @@ void playSound()
 void playMusic()
 {
     // Load an ogg music file
-    sf::Music music;
+    sf3d::Music music;
     if (!music.openFromFile("resources/orchestral.ogg"))
         return;
 
@@ -63,10 +63,10 @@ void playMusic()
     music.play();
 
     // Loop while the music is playing
-    while (music.getStatus() == sf::Music::Playing)
+    while (music.getStatus() == sf3d::Music::Playing)
     {
         // Leave some CPU time for other processes
-        sf::sleep(sf::milliseconds(100));
+        sf3d::sleep(sf3d::milliseconds(100));
 
         // Display the playing position
         std::cout << "\rPlaying... " << std::fixed << std::setprecision(2) << music.getPlayingOffset().asSeconds() << " sec   ";

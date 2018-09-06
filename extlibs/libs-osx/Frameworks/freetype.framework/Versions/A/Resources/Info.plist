@@ -7,7 +7,7 @@
 	<key>CFBundleExecutable</key>
 	<string>freetype</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.sfml-dev.freetype</string>
+	<string>org.sfml3d-dev.freetype</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundlePackageType</key>

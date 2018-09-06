@@ -2,7 +2,7 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include <SFML/Window.hpp>
+#include <SFML3D/Window.hpp>
 #include <X11/Xlib.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
@@ -15,7 +15,7 @@
 /// \param Window Target window to initialize
 ///
 ////////////////////////////////////////////////////////////
-void initialize(sf::Window& window)
+void initialize(sf3d::Window& window)
 {
     // Activate the window
     window.setActive();
@@ -43,7 +43,7 @@ void initialize(sf::Window& window)
 /// \param elapsedTime Time elapsed since the last draw
 ///
 ////////////////////////////////////////////////////////////
-void draw(sf::Window& window, float elapsedTime)
+void draw(sf3d::Window& window, float elapsedTime)
 {
     // Activate the window
     window.setActive();
@@ -132,9 +132,9 @@ int main()
         return EXIT_FAILURE;
 
     // Set the window's name
-    XStoreName(display, window , "SFML Window");
+    XStoreName(display, window , "SFML3D Window");
 
-    // Let's create the windows which will serve as containers for our SFML views
+    // Let's create the windows which will serve as containers for our SFML3D views
     Window view1 = XCreateWindow(display, window,
                                  10, 10, 310, 310, 0,
                                  DefaultDepth(display, screen),
@@ -152,16 +152,16 @@ int main()
     XMapWindow(display, window);
     XFlush(display);
 
-    // Create our SFML views
-    sf::Window SFMLView1(view1);
-    sf::Window SFMLView2(view2);
+    // Create our SFML3D views
+    sf3d::Window SFML3DView1(view1);
+    sf3d::Window SFML3DView2(view2);
 
     // Create a clock for measuring elapsed time
-    sf::Clock clock;
+    sf3d::Clock clock;
 
     // Initialize our views
-    initialize(SFMLView1);
-    initialize(SFMLView2);
+    initialize(SFML3DView1);
+    initialize(SFML3DView2);
 
     // Start the event loop
     bool running = true;
@@ -184,12 +184,12 @@ int main()
         }
 
         // Draw something into our views
-        draw(SFMLView1, clock.getElapsedTime().asSeconds());
-        draw(SFMLView2, clock.getElapsedTime().asSeconds() * 0.3f);
+        draw(SFML3DView1, clock.getElapsedTime().asSeconds());
+        draw(SFML3DView2, clock.getElapsedTime().asSeconds() * 0.3f);
 
         // Display the views on screen
-        SFMLView1.display();
-        SFMLView2.display();
+        SFML3DView1.display();
+        SFML3DView2.display();
     }
 
     // Close the display

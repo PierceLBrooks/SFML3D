@@ -9,6 +9,6 @@ find_package(OpenGL REQUIRED)
 include_directories(${OPENGL_INCLUDE_DIR})
 
 # define the window target
-sfml_add_example(window GUI_APP
+sfml3d_add_example(window GUI_APP
                  SOURCES ${SRC}
-                 DEPENDS sfml-window sfml-system ${OPENGL_LIBRARIES})
+                 DEPENDS sfml3d-window sfml3d-system ${OPENGL_LIBRARIES})

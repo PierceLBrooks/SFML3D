@@ -5,6 +5,6 @@ set(SRCROOT ${PROJECT_SOURCE_DIR}/examples/3d)
 set(SRC ${SRCROOT}/3d.cpp)
 
 # define the 3d target
-sfml_add_example(3d GUI_APP
+sfml3d_add_example(3d GUI_APP
                  SOURCES ${SRC}
-                 DEPENDS sfml-graphics sfml-window sfml-system)
+                 DEPENDS sfml3d-graphics sfml3d-window sfml3d-system)

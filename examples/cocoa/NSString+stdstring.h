@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////
 //
-// SFML - Simple and Fast Multimedia Library
+// SFML3D - Simple and Fast Multimedia Library
 // Copyright (C) 2007-2014 Marco Antognini (antognini.marco@gmail.com),
 //                         Laurent Gomila (laurent.gom@gmail.com),
 //

@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////
 //
-// SFML - Simple and Fast Multimedia Library
+// SFML3D - Simple and Fast Multimedia Library
 // Copyright (C) 2007-2014 Marco Antognini (antognini.marco@gmail.com),
 //                         Laurent Gomila (laurent.gom@gmail.com),
 //
@@ -24,7 +24,7 @@
 ////////////////////////////////////////////////////////////
 
 #import "NSString+stdstring.h"
-#include <SFML/System/Utf.hpp>
+#include <SFML3D/System/Utf.hpp>
 
 @implementation NSString (NSString_stdstring)
 
@@ -33,7 +33,7 @@
     std::string utf8;
     utf8.reserve(string.size() + 1);
 
-    sf::Utf8::fromAnsi(string.begin(), string.end(), std::back_inserter(utf8));
+    sf3d::Utf8::fromAnsi(string.begin(), string.end(), std::back_inserter(utf8));
 
     NSString *str = [NSString stringWithCString:utf8.c_str()
                                        encoding:NSUTF8StringEncoding];

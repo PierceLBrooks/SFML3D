@@ -1,11 +1,11 @@
 include(CMakeParseArguments)
 
-# add a new target which is a SFML library
-# ex: sfml_add_library(sfml-graphics
+# add a new target which is a SFML3D library
+# ex: sfml_add_library(sfml3d-graphics
 #                      SOURCES sprite.cpp image.cpp ...
-#                      DEPENDS sfml-window sfml-system
+#                      DEPENDS sfml3d-window sfml3d-system
 #                      EXTERNAL_LIBS opengl freetype ...)
-macro(sfml_add_library target)
+macro(sfml3d_add_library target)
 
     # parse the arguments
     cmake_parse_arguments(THIS "" "" "SOURCES;DEPENDS;EXTERNAL_LIBS" ${ARGN})
@@ -20,14 +20,14 @@ macro(sfml_add_library target)
 
     # adjust the output file prefix/suffix to match our conventions
     if(BUILD_SHARED_LIBS)
-        if(SFML_OS_WINDOWS)
+        if(SFML3D_OS_WINDOWS)
             # include the major version number in Windows shared library names (but not import library names)
             set_target_properties(${target} PROPERTIES DEBUG_POSTFIX -d)
             set_target_properties(${target} PROPERTIES SUFFIX "-${VERSION_MAJOR}${CMAKE_SHARED_LIBRARY_SUFFIX}")
         else()
             set_target_properties(${target} PROPERTIES DEBUG_POSTFIX -d)
         endif()
-        if (SFML_OS_WINDOWS AND SFML_COMPILER_GCC)
+        if (SFML3D_OS_WINDOWS AND SFML3D_COMPILER_GCC)
             # on Windows/gcc get rid of "lib" prefix for shared libraries,
             # and transform the ".dll.a" suffix into ".a" for import libraries
             set_target_properties(${target} PROPERTIES PREFIX "")
@@ -44,31 +44,31 @@ macro(sfml_add_library target)
     set_target_properties(${target} PROPERTIES VERSION ${VERSION_MAJOR}.${VERSION_MINOR})
 
     # set the target's folder (for IDEs that support it, e.g. Visual Studio)
-    set_target_properties(${target} PROPERTIES FOLDER "SFML")
+    set_target_properties(${target} PROPERTIES FOLDER "SFML3D")
 
-    # for gcc >= 4.0 on Windows, apply the SFML_USE_STATIC_STD_LIBS option if it is enabled
-    if(SFML_OS_WINDOWS AND SFML_COMPILER_GCC AND NOT SFML_GCC_VERSION VERSION_LESS "4")
-        if(SFML_USE_STATIC_STD_LIBS AND NOT SFML_COMPILER_GCC_TDM)
+    # for gcc >= 4.0 on Windows, apply the SFML3D_USE_STATIC_STD_LIBS option if it is enabled
+    if(SFML3D_OS_WINDOWS AND SFML3D_COMPILER_GCC AND NOT SFML3D_GCC_VERSION VERSION_LESS "4")
+        if(SFML3D_USE_STATIC_STD_LIBS AND NOT SFML3D_COMPILER_GCC_TDM)
             set_target_properties(${target} PROPERTIES LINK_FLAGS "-static-libgcc -static-libstdc++")
-        elseif(NOT SFML_USE_STATIC_STD_LIBS AND SFML_COMPILER_GCC_TDM)
+        elseif(NOT SFML3D_USE_STATIC_STD_LIBS AND SFML3D_COMPILER_GCC_TDM)
             set_target_properties(${target} PROPERTIES LINK_FLAGS "-shared-libgcc -shared-libstdc++")
         endif()
     endif()
 
     # if using gcc >= 4.0 or clang >= 3.0 on a non-Windows platform, we must hide public symbols by default
     # (exported ones are explicitely marked)
-    if(NOT SFML_OS_WINDOWS AND ((SFML_COMPILER_GCC AND NOT SFML_GCC_VERSION VERSION_LESS "4") OR (SFML_COMPILER_CLANG AND NOT SFML_CLANG_VERSION VERSION_LESS "3")))
+    if(NOT SFML3D_OS_WINDOWS AND ((SFML3D_COMPILER_GCC AND NOT SFML3D_GCC_VERSION VERSION_LESS "4") OR (SFML3D_COMPILER_CLANG AND NOT SFML3D_CLANG_VERSION VERSION_LESS "3")))
         set_target_properties(${target} PROPERTIES COMPILE_FLAGS -fvisibility=hidden)
     endif()
 
-    # link the target to its SFML dependencies
+    # link the target to its SFML3D dependencies
     if(THIS_DEPENDS)
         target_link_libraries(${target} ${THIS_DEPENDS})
     endif()
 
     # build frameworks or dylibs
-    if(SFML_OS_MACOSX AND BUILD_SHARED_LIBS)
-        if(SFML_BUILD_FRAMEWORKS)
+    if(SFML3D_OS_MACOSX AND BUILD_SHARED_LIBS)
+        if(SFML3D_BUILD_FRAMEWORKS)
             # adapt target to build frameworks instead of dylibs
             set_target_properties(${target} PROPERTIES 
                                   FRAMEWORK TRUE
@@ -98,7 +98,7 @@ macro(sfml_add_library target)
 
 endmacro()
 
-# add a new target which is a SFML example
+# add a new target which is a SFML3D example
 # ex: sfml_add_example(ftp
 #                      SOURCES ftp.cpp ...
 #                      DEPENDS sfml-network sfml-system)
@@ -111,7 +111,7 @@ macro(sfml_add_example target)
     source_group("" FILES ${THIS_SOURCES})
 
     # create the target
-    if(THIS_GUI_APP AND SFML_OS_WINDOWS)
+    if(THIS_GUI_APP AND SFML3D_OS_WINDOWS)
         add_executable(${target} WIN32 ${THIS_SOURCES})
         target_link_libraries(${target} sfml-main)
     else()
@@ -124,16 +124,16 @@ macro(sfml_add_example target)
     # set the target's folder (for IDEs that support it, e.g. Visual Studio)
     set_target_properties(${target} PROPERTIES FOLDER "Examples")
 
-    # for gcc >= 4.0 on Windows, apply the SFML_USE_STATIC_STD_LIBS option if it is enabled
-    if(SFML_OS_WINDOWS AND SFML_COMPILER_GCC AND NOT SFML_GCC_VERSION VERSION_LESS "4")
-        if(SFML_USE_STATIC_STD_LIBS AND NOT SFML_COMPILER_GCC_TDM)
+    # for gcc >= 4.0 on Windows, apply the SFML3D_USE_STATIC_STD_LIBS option if it is enabled
+    if(SFML3D_OS_WINDOWS AND SFML3D_COMPILER_GCC AND NOT SFML3D_GCC_VERSION VERSION_LESS "4")
+        if(SFML3D_USE_STATIC_STD_LIBS AND NOT SFML3D_COMPILER_GCC_TDM)
             set_target_properties(${target} PROPERTIES LINK_FLAGS "-static-libgcc -static-libstdc++")
-        elseif(NOT SFML_USE_STATIC_STD_LIBS AND SFML_COMPILER_GCC_TDM)
+        elseif(NOT SFML3D_USE_STATIC_STD_LIBS AND SFML3D_COMPILER_GCC_TDM)
             set_target_properties(${target} PROPERTIES LINK_FLAGS "-shared-libgcc -shared-libstdc++")
         endif()
     endif()
 
-    # link the target to its SFML dependencies
+    # link the target to its SFML3D dependencies
     if(THIS_DEPENDS)
         target_link_libraries(${target} ${THIS_DEPENDS})
     endif()

@@ -2,20 +2,20 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include <SFML/Audio.hpp>
-#include <SFML/Network.hpp>
+#include <SFML3D/Audio.hpp>
+#include <SFML3D/Network.hpp>
 #include <iostream>
 
 
-const sf::Uint8 audioData   = 1;
-const sf::Uint8 endOfStream = 2;
+const sf3d::Uint8 audioData   = 1;
+const sf3d::Uint8 endOfStream = 2;
 
 
 ////////////////////////////////////////////////////////////
 /// Specialization of audio recorder for sending recorded audio
 /// data through the network
 ////////////////////////////////////////////////////////////
-class NetworkRecorder : public sf::SoundRecorder
+class NetworkRecorder : public sf3d::SoundRecorder
 {
 public :
 
@@ -26,7 +26,7 @@ public :
     /// \param port Port of the remote host
     ///
     ////////////////////////////////////////////////////////////
-    NetworkRecorder(const sf::IpAddress& host, unsigned short port) :
+    NetworkRecorder(const sf3d::IpAddress& host, unsigned short port) :
     m_host(host),
     m_port(port)
     {
@@ -40,7 +40,7 @@ private :
     ////////////////////////////////////////////////////////////
     virtual bool onStart()
     {
-        if (m_socket.connect(m_host, m_port) == sf::Socket::Done)
+        if (m_socket.connect(m_host, m_port) == sf3d::Socket::Done)
         {
             std::cout << "Connected to server " << m_host << std::endl;
             return true;
@@ -55,15 +55,15 @@ private :
     /// /see SoundRecorder::ProcessSamples
     ///
     ////////////////////////////////////////////////////////////
-    virtual bool onProcessSamples(const sf::Int16* samples, std::size_t sampleCount)
+    virtual bool onProcessSamples(const sf3d::Int16* samples, std::size_t sampleCount)
     {
         // Pack the audio samples into a network packet
-        sf::Packet packet;
+        sf3d::Packet packet;
         packet << audioData;
-        packet.append(samples, sampleCount * sizeof(sf::Int16));
+        packet.append(samples, sampleCount * sizeof(sf3d::Int16));
 
         // Send the audio packet to the server
-        return m_socket.send(packet) == sf::Socket::Done;
+        return m_socket.send(packet) == sf3d::Socket::Done;
     }
 
     ////////////////////////////////////////////////////////////
@@ -73,7 +73,7 @@ private :
     virtual void onStop()
     {
         // Send a "end-of-stream" packet
-        sf::Packet packet;
+        sf3d::Packet packet;
         packet << endOfStream;
         m_socket.send(packet);
 
@@ -84,9 +84,9 @@ private :
     ////////////////////////////////////////////////////////////
     // Member data
     ////////////////////////////////////////////////////////////
-    sf::IpAddress  m_host;   ///< Address of the remote host
+    sf3d::IpAddress  m_host;   ///< Address of the remote host
     unsigned short m_port;   ///< Remote port
-    sf::TcpSocket  m_socket; ///< Socket used to communicate with the server
+    sf3d::TcpSocket  m_socket; ///< Socket used to communicate with the server
 };
 
 
@@ -98,20 +98,20 @@ private :
 void doClient(unsigned short port)
 {
     // Check that the device can capture audio
-    if (sf::SoundRecorder::isAvailable() == false)
+    if (sf3d::SoundRecorder::isAvailable() == false)
     {
         std::cout << "Sorry, audio capture is not supported by your system" << std::endl;
         return;
     }
 
     // Ask for server address
-    sf::IpAddress server;
+    sf3d::IpAddress server;
     do
     {
         std::cout << "Type address or name of the server to connect to : ";
         std::cin  >> server;
     }
-    while (server == sf::IpAddress::None);
+    while (server == sf3d::IpAddress::None);
 
     // Create an instance of our custom recorder
     NetworkRecorder recorder(server, port);
