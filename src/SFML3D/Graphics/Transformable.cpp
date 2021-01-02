@@ -240,7 +240,7 @@ const Transform& Transformable::getTransform() const
         Transform position_transform = Transform::Identity;
         position_transform.translate(m_position);
 
-        m_transform = position_transform * scale_transform * m_rotation_transform * origin_transform;
+        m_transform = position_transform * m_rotation_transform * scale_transform * origin_transform;
         m_transformNeedUpdate = false;
     }
 
