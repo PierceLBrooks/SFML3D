@@ -36,7 +36,7 @@ namespace
     unsigned int referenceCount = 0;
 }
 
-namespace sf
+namespace sf3d
 {
 namespace priv
 {
@@ -62,4 +62,4 @@ void CloseDisplay(Display* display)
 
 } // namespace priv
 
-} // namespace sf
+} // namespace sf3d

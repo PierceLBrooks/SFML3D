@@ -28,7 +28,7 @@
 #include <SFML3D/System/Unix/ThreadLocalImpl.hpp>
 
 
-namespace sf
+namespace sf3d
 {
 namespace priv
 {
@@ -61,4 +61,4 @@ void* ThreadLocalImpl::getValue() const
 
 } // namespace priv
 
-} // namespace sf
+} // namespace sf3d

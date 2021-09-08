@@ -32,7 +32,7 @@
 #include <SFML3D/System/Time.hpp>
 
 
-namespace sf
+namespace sf3d
 {
 namespace priv
 {
@@ -55,7 +55,7 @@ public :
 
 } // namespace priv
 
-} // namespace sf
+} // namespace sf3d
 
 
 #endif // SFML3D_CLOCKIMPLUNIX_HPP

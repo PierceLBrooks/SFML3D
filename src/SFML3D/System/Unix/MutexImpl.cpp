@@ -28,7 +28,7 @@
 #include <SFML3D/System/Unix/MutexImpl.hpp>
 
 
-namespace sf
+namespace sf3d
 {
 namespace priv
 {
@@ -66,4 +66,4 @@ void MutexImpl::unlock()
 
 } // namespace priv
 
-} // namespace sf
+} // namespace sf3d

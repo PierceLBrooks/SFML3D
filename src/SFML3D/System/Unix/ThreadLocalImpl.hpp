@@ -32,7 +32,7 @@
 #include <pthread.h>
 
 
-namespace sf
+namespace sf3d
 {
 namespace priv
 {
@@ -81,7 +81,7 @@ private :
 
 } // namespace priv
 
-} // namespace sf
+} // namespace sf3d
 
 
 #endif // SFML3D_THREADLOCALIMPL_HPP

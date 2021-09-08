@@ -77,7 +77,7 @@ namespace
 }
 
 
-namespace sf
+namespace sf3d
 {
 namespace priv
 {
@@ -1014,4 +1014,4 @@ Keyboard::Key WindowImplX11::keysymToSF(KeySym symbol)
 
 } // namespace priv
 
-} // namespace sf
+} // namespace sf3d

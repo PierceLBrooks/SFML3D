@@ -31,7 +31,7 @@
 #include <cassert>
 
 
-namespace sf
+namespace sf3d
 {
 namespace priv
 {
@@ -82,4 +82,4 @@ void* ThreadImpl::entryPoint(void* userData)
 
 } // namespace priv
 
-} // namespace sf
+} // namespace sf3d

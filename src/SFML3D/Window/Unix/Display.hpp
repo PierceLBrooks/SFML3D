@@ -31,7 +31,7 @@
 #include <X11/Xlib.h>
 
 
-namespace sf
+namespace sf3d
 {
 namespace priv
 {
@@ -56,7 +56,7 @@ void CloseDisplay(Display* display);
 
 } // namespace priv
 
-} // namespace sf
+} // namespace sf3d
 
 
 #endif // SFML3D_SHAREDDISPLAY_HPP

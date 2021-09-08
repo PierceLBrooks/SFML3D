@@ -81,7 +81,7 @@ namespace
 }
 
 
-namespace sf
+namespace sf3d
 {
 namespace priv
 {
@@ -333,4 +333,4 @@ unsigned int JoystickImpl::getUdevAttributeUint(unsigned int index, std::string 
 
 } // namespace priv
 
-} // namespace sf
+} // namespace sf3d

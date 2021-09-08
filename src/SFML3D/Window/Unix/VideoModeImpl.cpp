@@ -33,7 +33,7 @@
 #include <algorithm>
 
 
-namespace sf
+namespace sf3d
 {
 namespace priv
 {
@@ -173,4 +173,4 @@ VideoMode VideoModeImpl::getDesktopMode()
 
 } // namespace priv
 
-} // namespace sf
+} // namespace sf3d

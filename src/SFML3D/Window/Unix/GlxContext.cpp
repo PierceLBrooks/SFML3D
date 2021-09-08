@@ -34,7 +34,7 @@
 #include <SFML3D/System/Err.hpp>
 
 
-namespace sf
+namespace sf3d
 {
 namespace priv
 {
@@ -340,4 +340,4 @@ void GlxContext::createContext(GlxContext* shared, unsigned int bitsPerPixel, co
 
 } // namespace priv
 
-} // namespace sf
+} // namespace sf3d

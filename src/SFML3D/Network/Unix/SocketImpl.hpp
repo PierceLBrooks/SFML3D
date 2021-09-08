@@ -38,7 +38,7 @@
 #include <unistd.h>
 
 
-namespace sf
+namespace sf3d
 {
 namespace priv
 {
@@ -103,7 +103,7 @@ public :
 
 } // namespace priv
 
-} // namespace sf
+} // namespace sf3d
 
 
 #endif // SFML3D_SOCKETIMPL_HPP

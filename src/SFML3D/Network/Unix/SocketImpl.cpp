@@ -31,7 +31,7 @@
 #include <cstring>
 
 
-namespace sf
+namespace sf3d
 {
 namespace priv
 {
@@ -101,4 +101,4 @@ Socket::Status SocketImpl::getErrorStatus()
 
 } // namespace priv
 
-} // namespace sf
+} // namespace sf3d

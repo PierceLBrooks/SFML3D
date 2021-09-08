@@ -32,7 +32,7 @@
 #include <pthread.h>
 
 
-namespace sf
+namespace sf3d
 {
 class Thread;
 
@@ -86,7 +86,7 @@ private :
 
 } // namespace priv
 
-} // namespace sf
+} // namespace sf3d
 
 
 #endif // SFML3D_THREADIMPL_HPP

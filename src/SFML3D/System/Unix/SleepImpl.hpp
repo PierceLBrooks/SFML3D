@@ -32,7 +32,7 @@
 #include <SFML3D/System/Time.hpp>
 
 
-namespace sf
+namespace sf3d
 {
 namespace priv
 {
@@ -46,7 +46,7 @@ void sleepImpl(Time time);
 
 } // namespace priv
 
-} // namespace sf
+} // namespace sf3d
 
 
 #endif // SFML3D_SLEEPIMPLUNIX_HPP
