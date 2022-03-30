@@ -83,6 +83,7 @@ Polyhedron::Face SphericalPolyhedron::getFace(unsigned int index) const
 ////////////////////////////////////////////////////////////
 void SphericalPolyhedron::construct() const
 {
+    static const float pi2 = 3.141592654f * 2.0f;
     // Icosahedron radii
     static const float a = 0.525731112119133606f;
     static const float b = 0.850650808352039932f;
@@ -131,7 +132,39 @@ void SphericalPolyhedron::construct() const
     m_geometry.reserve(60 * (1 << (m_subdivisions * 2)));
 
     for (int i = 0; i < 20; ++i)
+    {
         subdivide(vertices[indices[i * 3 + 0]], vertices[indices[i * 3 + 1]], vertices[indices[i * 3 + 2]], m_subdivisions);
+    }
+    
+    Vector2f extrema(m_geometry[0].position.y, m_geometry[0].position.y);
+    
+    for (int i = 1; i < m_geometry.size(); ++i)
+    {
+        if (m_geometry[i].position.y > extrema.x)
+        {
+            extrema.x = m_geometry[i].position.y;
+        }
+        if (m_geometry[i].position.y < extrema.y)
+        {
+            extrema.y = m_geometry[i].position.y;
+        }
+    }
+    
+    float height = extrema.x - extrema.y;
+    
+    if (height > 0.0f)
+    {
+        for (int i = 0; i < m_geometry.size(); ++i)
+        {
+            float angle = std::atan2(m_geometry[i].position.y, m_geometry[i].position.x);
+            while (angle < 0.0f)
+            {
+                angle += pi2;
+            }
+            m_geometry[i].texCoords.y = (m_geometry[i].position.y - extrema.y) / height;
+            m_geometry[i].texCoords.x = std::fmod(angle, pi2) / pi2;
+        }
+    }
 }
 
 
