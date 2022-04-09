@@ -49,7 +49,7 @@
 ///
 ////////////////////////////////////////////////////////////
 
-namespace sf
+namespace sf3d
 {
 namespace priv
 {
@@ -178,7 +178,7 @@ void PoolWrapper::drain()
 
 } // namespace priv
 
-} // namespace sf
+} // namespace sf3d
 
 ////////////////////////////////////////////////////////////
 // Private data

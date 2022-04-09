@@ -33,7 +33,7 @@
 #include <IOKit/hid/IOHIDManager.h>
 #include <IOKit/hid/IOHIDDevice.h>
 
-namespace sf
+namespace sf3d
 {
 namespace priv
 {
@@ -123,6 +123,6 @@ private :
 
 } // namespace priv
 
-} // namespace sf
+} // namespace sf3d
 
 #endif

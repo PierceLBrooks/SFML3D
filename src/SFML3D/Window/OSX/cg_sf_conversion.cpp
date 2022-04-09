@@ -29,7 +29,7 @@
 #include <SFML3D/Window/OSX/cg_sf_conversion.hpp>
 #include <SFML3D/System/Err.hpp>
 
-namespace sf
+namespace sf3d
 {
 namespace priv
 {
@@ -178,4 +178,4 @@ CGDisplayModeRef convertSFModeToCGMode(VideoMode sfmode)
 #endif
 
 } // namespace priv
-} // namespace sf
+} // namespace sf3d

@@ -38,7 +38,7 @@
 #import <SFML3D/Window/OSX/SFApplicationDelegate.h>
 #import <SFML3D/Window/OSX/SFKeyboardModifiersHelper.h>
 
-namespace sf
+namespace sf3d
 {
 namespace priv
 {
@@ -437,4 +437,4 @@ void WindowImplCocoa::setKeyRepeatEnabled(bool enabled)
 
 } // namespace priv
 
-} // namespace sf
+} // namespace sf3d

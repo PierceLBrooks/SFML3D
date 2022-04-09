@@ -40,7 +40,7 @@ namespace
 }
 
 
-namespace sf
+namespace sf3d
 {
 namespace priv
 {
@@ -147,5 +147,5 @@ void HIDJoystickManager::pluggedOut(void * context, IOReturn, void *, IOHIDDevic
 
 } // namespace priv
 
-} // namespace sf
+} // namespace sf3d
 

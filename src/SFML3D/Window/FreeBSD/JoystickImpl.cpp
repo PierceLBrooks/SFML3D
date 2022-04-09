@@ -178,7 +178,7 @@ end:
 }
 
 
-namespace sf
+namespace sf3d
 {
 namespace priv
 {
@@ -382,6 +382,6 @@ JoystickState JoystickImpl::JoystickImpl::update()
 
 } // namespace priv
 
-} // namespace sf
+} // namespace sf3d
 
 // vim: set expandtab tabstop=4 softtabstop=4 shiftwidth=4:

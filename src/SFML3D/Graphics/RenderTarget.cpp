@@ -661,7 +661,11 @@ void RenderTarget::resetGLStates()
 
         glCheck(glDepthFunc(GL_GEQUAL));
         glCheck(glClearDepth(0.f));
+#ifdef SFML3D_SYSTEM_MACOS
+        glCheck(glDepthRangefOES(1.f, 0.f));
+#else
         glCheck(glDepthRangef(1.f, 0.f));
+#endif
 
         if (!m_defaultShader)
         {

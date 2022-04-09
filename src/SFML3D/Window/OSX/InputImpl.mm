@@ -44,7 +44,7 @@
 ///
 ////////////////////////////////////////////////////////////
 
-namespace sf
+namespace sf3d
 {
 namespace priv
 {
@@ -180,4 +180,4 @@ void InputImpl::setMousePosition(const Vector2i& position, const Window& relativ
 
 } // namespace priv
 
-} // namespace sf
+} // namespace sf3d

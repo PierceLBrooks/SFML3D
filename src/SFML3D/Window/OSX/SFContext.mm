@@ -32,7 +32,7 @@
 
 #import <SFML3D/Window/OSX/AutoreleasePoolWrapper.h>
 
-namespace sf
+namespace sf3d
 {
 namespace priv
 {
@@ -219,5 +219,5 @@ void SFContext::createContext(SFContext* shared,
 
 } // namespace priv
 
-} // namespace sf
+} // namespace sf3d
 

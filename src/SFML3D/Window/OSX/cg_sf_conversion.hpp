@@ -32,7 +32,7 @@
 #include <SFML3D/Window/VideoMode.hpp>
 #include <ApplicationServices/ApplicationServices.h>
 
-namespace sf
+namespace sf3d
 {
 namespace priv
 {
@@ -77,6 +77,6 @@ CGDisplayModeRef convertSFModeToCGMode(VideoMode sfmode);
 #endif
 
 } // namespace priv
-} // namespace sf
+} // namespace sf3d
 
 #endif

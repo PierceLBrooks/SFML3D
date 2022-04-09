@@ -30,7 +30,7 @@
 #include <SFML3D/System/Err.hpp>
 #include <AppKit/AppKit.h>
 
-namespace sf
+namespace sf3d
 {
 namespace priv
 {
@@ -993,5 +993,5 @@ Keyboard::Key HIDInputManager::nonLocalizedKeys(UniChar virtualKeycode)
 
 } // namespace priv
 
-} // namespace sf
+} // namespace sf3d
 

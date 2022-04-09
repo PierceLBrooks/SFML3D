@@ -41,7 +41,7 @@ namespace
 }
 
 
-namespace sf
+namespace sf3d
 {
 namespace priv
 {
@@ -453,4 +453,4 @@ std::string JoystickImpl::stringFromCFString(CFStringRef cfString)
 
 } // namespace priv
 
-} // namespace sf
+} // namespace sf3d

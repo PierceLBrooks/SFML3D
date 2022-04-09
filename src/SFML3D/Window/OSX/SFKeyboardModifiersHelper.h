@@ -28,7 +28,7 @@
 ////////////////////////////////////////////////////////////
 #import <AppKit/AppKit.h>
 
-namespace sf {
+namespace sf3d {
     namespace priv {
         class WindowImplCocoa;
     }

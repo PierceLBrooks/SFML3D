@@ -32,7 +32,7 @@
 #include <dev/usb/usbhid.h>
 #include <usbhid.h>
 
-namespace sf
+namespace sf3d
 {
 namespace priv
 {
@@ -126,7 +126,7 @@ private :
 
 } // namespace priv
 
-} // namespace sf
+} // namespace sf3d
 
 
 #endif // SFML3D_JOYSTICKIMPLFREEBSD_HPP
