@@ -99,10 +99,10 @@ macro(sfml3d_add_library target)
 endmacro()
 
 # add a new target which is a SFML3D example
-# ex: sfml_add_example(ftp
+# ex: sfml3d_add_example(ftp
 #                      SOURCES ftp.cpp ...
 #                      DEPENDS sfml-network sfml-system)
-macro(sfml_add_example target)
+macro(sfml3d_add_example target)
 
     # parse the arguments
     cmake_parse_arguments(THIS "GUI_APP" "" "SOURCES;DEPENDS" ${ARGN})
@@ -113,7 +113,7 @@ macro(sfml_add_example target)
     # create the target
     if(THIS_GUI_APP AND SFML3D_OS_WINDOWS)
         add_executable(${target} WIN32 ${THIS_SOURCES})
-        target_link_libraries(${target} sfml-main)
+        target_link_libraries(${target} sfml3d-main)
     else()
         add_executable(${target} ${THIS_SOURCES})
     endif()
