@@ -922,12 +922,12 @@ void RenderTarget::setupNonLegacyPipeline()
 #endif
 
     // This will only succeed if the supported version is not GLSL ES
-    if (versionNumber > 1.29)
+    if (versionNumber > 1.39)
     {
         m_defaultShader = new Shader;
 
         std::stringstream vertexShaderSource;
-        vertexShaderSource << "#version 420\n"
+        vertexShaderSource << "#version 140\n"
                               "\n"
                               "// Uniforms\n"
                               "uniform mat4 sf_ModelMatrix;\n"
@@ -970,7 +970,7 @@ void RenderTarget::setupNonLegacyPipeline()
                               "}\n";
 
         std::stringstream fragmentShaderSource;
-        fragmentShaderSource << "#version 420\n";
+        fragmentShaderSource << "#version 140\n";
 
         if (Shader::isUniformBufferAvailable())
             fragmentShaderSource << "#extension GL_ARB_uniform_buffer_object : enable\n";
