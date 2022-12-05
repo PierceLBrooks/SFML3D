@@ -927,7 +927,7 @@ void RenderTarget::setupNonLegacyPipeline()
         m_defaultShader = new Shader;
 
         std::stringstream vertexShaderSource;
-        vertexShaderSource << "#version 130\n"
+        vertexShaderSource << "#version 420\n"
                               "\n"
                               "// Uniforms\n"
                               "uniform mat4 sf_ModelMatrix;\n"
@@ -970,7 +970,7 @@ void RenderTarget::setupNonLegacyPipeline()
                               "}\n";
 
         std::stringstream fragmentShaderSource;
-        fragmentShaderSource << "#version 130\n";
+        fragmentShaderSource << "#version 420\n";
 
         if (Shader::isUniformBufferAvailable())
             fragmentShaderSource << "#extension GL_ARB_uniform_buffer_object : enable\n";
