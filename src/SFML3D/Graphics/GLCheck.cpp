@@ -27,6 +27,24 @@
 ////////////////////////////////////////////////////////////
 #include <SFML3D/Graphics/GLCheck.hpp>
 #include <SFML3D/System/Err.hpp>
+#include <cstdio>
+
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1900)
+#ifdef __cplusplus
+extern "C" 
+{
+#endif
+FILE _iob[] = {*stdin, *stdout, *stderr};
+
+FILE * __cdecl __iob_func(void)
+{
+    return _iob;
+}
+#ifdef __cplusplus
+}
+#endif
+#endif
 
 
 namespace sf3d

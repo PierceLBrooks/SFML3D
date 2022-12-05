@@ -152,3 +152,9 @@ sfml3d_add_library(sfml3d-graphics
                  SOURCES ${SRC} ${DRAWABLES_SRC} ${RENDER_TEXTURE_SRC} ${STB_SRC}
                  DEPENDS sfml3d-window sfml3d-system
                  EXTERNAL_LIBS ${GRAPHICS_EXT_LIBS})
+
+# starting from Visual Studio 2015, inline versions of some C functions are used; for compatibility link this library
+# see https://docs.microsoft.com/en-us/cpp/porting/overview-of-potential-upgrade-issues-visual-cpp?view=msvc-160#libraries
+if(SFML3D_COMPILER_MSVC OR (SFML3D_COMPILER_CLANG AND SFML3D_OS_WINDOWS AND NOT MINGW))
+    target_link_libraries(sfml3d-graphics PRIVATE legacy_stdio_definitions.lib)
+endif()
